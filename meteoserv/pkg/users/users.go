@@ -50,6 +50,32 @@ func (r *Registry) Read(id string) (User, error) {
 	return u, err
 }
 
+// Update exchanges the stored User entry.
+func (r *Registry) Update(u User) error {
+	var err error
+	r.doSync(func() {
+		if _, ok := r.users[u.ID]; !ok {
+			err = fmt.Errorf("user %q not found", u.ID)
+			return
+		}
+		r.users[u.ID] = u
+	})
+	return err
+}
+
+// Delete removes a User entry by ID.
+func (r *Registry) Delete(id string) error {
+	var err error
+	r.doSync(func() {
+		if _, ok := r.users[id]; !ok {
+			err = fmt.Errorf("user %q not found", id)
+			return
+		}
+		delete(r.users, id)
+	})
+	return err
+}
+
 // doSync sends an action for execution to the backend and waits
 // until its done. Right now no handling of timeouts to cover.
 // closed channels.
@@ -71,7 +97,7 @@ func (r *Registry) backend() {
 		select {
 		case <-r.ctx.Done():
 			return
-		case action := <-s.actionc:
+		case action := <-r.actionc:
 			action()
 		}
 	}
