@@ -50,6 +50,22 @@ func (r *Registry) Read(id string) (User, error) {
 	return u, err
 }
 
+// ReadSubscriptions retrieves the subscriptions of a User by ID.
+func (r *Registry) ReadSubscriptions(id string) ([]string, error) {
+	var s []string
+	var err error
+	r.doSync(func() {
+		var ok bool
+		u, ok := r.users[id]
+		if !ok {
+			err = fmt.Errorf("user %q not found", id)
+			return
+		}
+		s = u.Subscriptions
+	})
+	return s, err
+}
+
 // Update exchanges the stored User entry.
 func (r *Registry) Update(u User) error {
 	var err error

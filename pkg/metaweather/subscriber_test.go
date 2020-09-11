@@ -1,15 +1,17 @@
-package metaweather
+package metaweather_test
 
 import (
 	"context"
 	"testing"
 	"time"
+
+	"github.com/themue/training-samples/pkg/metaweather"
 )
 
 func TestSubscribe(t *testing.T) {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
-	sub := StartSubscriber(ctx, 10*time.Second)
+	sub := metaweather.StartSubscriber(ctx, 10*time.Second)
 
 	cities := sub.Subscribe("london")
 	if len(cities) != 1 {
@@ -28,7 +30,7 @@ func TestSubscribe(t *testing.T) {
 func TestUpdates(t *testing.T) {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
-	sub := StartSubscriber(ctx, 5*time.Second)
+	sub := metaweather.StartSubscriber(ctx, 5*time.Second)
 
 	sub.Subscribe("london")
 

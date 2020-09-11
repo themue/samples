@@ -1,12 +1,14 @@
-package metaweather
+package metaweather_test
 
 import (
 	"strings"
 	"testing"
+
+	"github.com/themue/training-samples/pkg/metaweather"
 )
 
 func TestSuccessfulSingleQuery(t *testing.T) {
-	locations, err := QueryLocations("london")
+	locations, err := metaweather.QueryLocations("london")
 	if err != nil {
 		t.Fatalf("query returned error: %v", err)
 	}
@@ -19,7 +21,7 @@ func TestSuccessfulSingleQuery(t *testing.T) {
 }
 
 func TestSuccessfulMultiQuery(t *testing.T) {
-	locations, err := QueryLocations("san")
+	locations, err := metaweather.QueryLocations("san")
 	if err != nil {
 		t.Fatalf("query returned error: %v", err)
 	}
@@ -34,7 +36,7 @@ func TestSuccessfulMultiQuery(t *testing.T) {
 }
 
 func TestSuccessfulEmptyQuery(t *testing.T) {
-	locations, err := QueryLocations("thisissomestrangelocationwhichdoesnotexist")
+	locations, err := metaweather.QueryLocations("thisissomestrangelocationwhichdoesnotexist")
 	if err != nil {
 		t.Fatalf("query returned error: %v", err)
 	}
@@ -44,7 +46,7 @@ func TestSuccessfulEmptyQuery(t *testing.T) {
 }
 
 func TestEmptyQueryValue(t *testing.T) {
-	_, err := QueryLocations("")
+	_, err := metaweather.QueryLocations("")
 	if err == nil {
 		t.Fatalf("error is nil")
 	}
@@ -54,12 +56,12 @@ func TestEmptyQueryValue(t *testing.T) {
 }
 
 func TestReadLondon(t *testing.T) {
-	locations, err := QueryLocations("london")
+	locations, err := metaweather.QueryLocations("london")
 	if err != nil {
 		t.Fatalf("query returned error: %v", err)
 	}
 	woeid := locations[0].WOEID
-	london, err := ReadWeather(woeid)
+	london, err := metaweather.ReadWeather(woeid)
 	if err != nil {
 		t.Fatalf("read returned error: %v", err)
 	}
