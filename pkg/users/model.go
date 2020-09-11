@@ -2,6 +2,6 @@ package users
 
 // User contains the information regarding one user.
 type User struct {
-	ID            string
-	Subscriptions []string
+	ID   string
+	Name string
 }

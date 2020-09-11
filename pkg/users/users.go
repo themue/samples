@@ -19,6 +19,7 @@ func StartRegistry(ctx context.Context) *Registry {
 		actionc: make(chan func(), 10),
 		users:   make(map[string]User),
 	}
+	go r.backend()
 	return r
 }
 
@@ -40,30 +41,15 @@ func (r *Registry) Read(id string) (User, error) {
 	var u User
 	var err error
 	r.doSync(func() {
-		var ok bool
-		u, ok = r.users[id]
+		ru, ok := r.users[id]
 		if !ok {
 			err = fmt.Errorf("user %q not found", id)
 			return
 		}
+		u.ID = ru.ID
+		u.Name = ru.Name
 	})
 	return u, err
-}
-
-// ReadSubscriptions retrieves the subscriptions of a User by ID.
-func (r *Registry) ReadSubscriptions(id string) ([]string, error) {
-	var s []string
-	var err error
-	r.doSync(func() {
-		var ok bool
-		u, ok := r.users[id]
-		if !ok {
-			err = fmt.Errorf("user %q not found", id)
-			return
-		}
-		s = u.Subscriptions
-	})
-	return s, err
 }
 
 // Update exchanges the stored User entry.
