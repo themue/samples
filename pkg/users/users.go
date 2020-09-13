@@ -12,11 +12,11 @@ type Registry struct {
 	users   map[string]User
 }
 
-// StartRegistry lets the Registry run in the background.
+// StartRegistry makes the Registry run in the background.
 func StartRegistry(ctx context.Context) *Registry {
 	r := &Registry{
 		ctx:     ctx,
-		actionc: make(chan func(), 10),
+		actionc: make(chan func(), 16),
 		users:   make(map[string]User),
 	}
 	go r.backend()

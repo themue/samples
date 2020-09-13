@@ -17,12 +17,12 @@ type Subscriber struct {
 	weathers  map[int]Weather
 }
 
-// StartSubscriber lets the Subscriber run in the background.
+// StartSubscriber makes the Subscriber run in the background.
 func StartSubscriber(ctx context.Context, interval time.Duration) *Subscriber {
 	s := &Subscriber{
 		ctx:       ctx,
 		interval:  interval,
-		actionc:   make(chan func(), 10),
+		actionc:   make(chan func(), 16),
 		locations: make(map[string]int),
 		weathers:  make(map[int]Weather),
 	}
