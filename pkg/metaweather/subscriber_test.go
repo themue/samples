@@ -8,25 +8,28 @@ import (
 	"github.com/themue/training-samples/pkg/metaweather"
 )
 
+// TestSubscribe verifies the subscription to a number of
+// locations together with the correct returned locations.
 func TestSubscribe(t *testing.T) {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 	sub := metaweather.StartSubscriber(ctx, 10*time.Second)
 
-	cities := sub.Subscribe("london")
-	if len(cities) != 1 {
-		t.Fatalf("illegal number of cities: %v", cities)
+	locations := sub.Subscribe("london")
+	if len(locations) != 1 {
+		t.Fatalf("illegal number of locations: %v", locations)
 	}
-	cities = sub.Subscribe("san")
-	if len(cities) != 11 {
-		t.Fatalf("illegal number of cities: %v", cities)
+	locations = sub.Subscribe("san")
+	if len(locations) != 11 {
+		t.Fatalf("illegal number of locations: %v", locations)
 	}
-	cities = sub.Subscribe("thisissomestrangelocationwhichdoesnotexist")
-	if len(cities) != 0 {
-		t.Fatalf("illegal number of cities: %v", cities)
+	locations = sub.Subscribe("thisissomestrangelocationwhichdoesnotexist")
+	if len(locations) != 0 {
+		t.Fatalf("illegal number of locations: %v", locations)
 	}
 }
 
+// TestUpdates verifies the background update of subscribed locations.
 func TestUpdates(t *testing.T) {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()

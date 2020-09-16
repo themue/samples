@@ -30,8 +30,8 @@ func StartSubscriber(ctx context.Context, interval time.Duration) *Subscriber {
 	return s
 }
 
-// Subscribe adds the subscription of one or multiple cities. Their
-// names will be returned.
+// Subscribe adds the subscription of one or multiple locations.
+// Their names will be returned.
 func (s *Subscriber) Subscribe(query string) []string {
 	names := []string{}
 
