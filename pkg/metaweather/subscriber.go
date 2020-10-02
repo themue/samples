@@ -1,3 +1,9 @@
+// The Samples Project
+//
+// Copyright 2020 Frank Mueller / Oldenburg / Germany / World
+//
+// All rights reserved. Use of this source code is governed
+// by the new BSD license.
 package metaweather
 
 import (
@@ -30,8 +36,8 @@ func StartSubscriber(ctx context.Context, interval time.Duration) *Subscriber {
 	return s
 }
 
-// Subscribe adds the subscription of one or multiple cities. Their
-// names will be returned.
+// Subscribe adds the subscription of one or multiple locations.
+// Their names will be returned.
 func (s *Subscriber) Subscribe(query string) []string {
 	names := []string{}
 
