@@ -10,7 +10,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/themue/training-samples/pkg/metaweather"
+	"github.com/themue/samples/pkg/metaweather"
 )
 
 // TestSuccessfulSingleQuery verifies the query of a location

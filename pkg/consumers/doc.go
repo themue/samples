@@ -4,10 +4,7 @@
 //
 // All rights reserved. Use of this source code is governed
 // by the new BSD license.
-package users
 
-// User contains the information regarding one user.
-type User struct {
-	ID   string
-	Name string
-}
+// Package consumers defines the model and manager for consumers
+// of services.
+package consumers

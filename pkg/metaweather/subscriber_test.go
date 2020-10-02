@@ -11,7 +11,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/themue/training-samples/pkg/metaweather"
+	"github.com/themue/samples/pkg/metaweather"
 )
 
 // TestSubscribe verifies the subscription to a number of
