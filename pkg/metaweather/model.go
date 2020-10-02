@@ -1,8 +1,18 @@
+// The Samples Project
+//
+// Copyright 2020 Frank Mueller / Oldenburg / Germany / World
+//
+// All rights reserved. Use of this source code is governed
+// by the new BSD license.
 package metaweather
 
 import (
 	"time"
 )
+
+// --------------------------------------------------
+// MetaWeather service request and response types.
+// --------------------------------------------------
 
 // Location is part of the locations response.
 type Location struct {
@@ -13,11 +23,11 @@ type Location struct {
 	Distance     int    `json:"distance"`
 }
 
-// Locations is returned when querying for locations.
+// Locations are always returned as a list.
 type Locations []Location
 
-// Parent is part of the location resonse and describes the
-// parent location."
+// Parent is part of the location response and describes the
+// parent location.
 type Parent struct {
 	Title        string `json:"title"`
 	LocationType string `json:"location_type"`
@@ -51,7 +61,7 @@ type Source struct {
 	URL   string `json:"url"`
 }
 
-// Weather is returned when querying a woeid.
+// Weather is returned when querying a WOEID.
 type Weather struct {
 	Title               string                `json:"title"`
 	LocationType        string                `json:"location_type"`

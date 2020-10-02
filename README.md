@@ -1,16 +1,15 @@
-# Samples
+# The Samples Project
 
-The samples repository is a little helper for other projects. Those are different
+The **Samples Project** is a repository containing source code, deployment descriptors,
+and configurations for various other projects. These are not productive projects, but
 
+* articles,
 * talks,
-* workshops,
-* trainings, and
-* articles.
+* trainings and
+* workshops.
 
-All those are around programming languages - mostly Go - and deployment desriptors.
-I try to create one logical world here, as a single solution. But with modules matching
-to the different topic. Also everything will be documented to understand the ideas
-and how it works. May even look too documented for a productive code later. :smile:
+These then refer to the Sample Project examples. It is loosely coupled in itself and yet
+tries to create a coordinated world. In this way the different users, i.e. the articles
+and co., can benefit from each other.
 
-The different talks, workshops, trainings, and articles then will ohne reference the
-accrding parts of the code here.
+I hope you enjoy it.
