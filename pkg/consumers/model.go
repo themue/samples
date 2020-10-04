@@ -9,5 +9,6 @@ package consumers
 // Consumer represents a user or a technical consumer of a service.
 type Consumer struct {
 	ID   string
+	Key  []byte
 	Name string
 }

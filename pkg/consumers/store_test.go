@@ -19,8 +19,8 @@ func TestCreateRead(t *testing.T) {
 	defer cancel()
 	store := consumers.StartInMemoryStore(ctx)
 
-	cFooIn := consumers.Consumer{"foo", "A. Foo"}
-	cBarIn := consumers.Consumer{"bar", "B. Bar"}
+	cFooIn := consumers.Consumer{"foo", []byte("secret"), "A. Foo"}
+	cBarIn := consumers.Consumer{"bar", []byte("password"), "B. Bar"}
 
 	if err := store.Create(cFooIn); err != nil {
 		t.Fatalf("creating %v failed: %v", cFooIn, err)
@@ -58,11 +58,11 @@ func TestUpdate(t *testing.T) {
 	defer cancel()
 	store := consumers.StartInMemoryStore(ctx)
 
-	store.Create(consumers.Consumer{"foo", "A. Foo"})
-	store.Create(consumers.Consumer{"bar", "B. Bar"})
+	store.Create(consumers.Consumer{"foo", []byte("secret"), "A. Foo"})
+	store.Create(consumers.Consumer{"bar", []byte("password"), "B. Bar"})
 
-	store.Update(consumers.Consumer{"foo", "A. Bar"})
-	store.Update(consumers.Consumer{"bar", "B. Foo"})
+	store.Update(consumers.Consumer{"foo", []byte("password"), "A. Bar"})
+	store.Update(consumers.Consumer{"bar", []byte("secret"), "B. Foo"})
 
 	cFooOut, err := store.Read("foo")
 	if err != nil {
@@ -86,7 +86,7 @@ func TestDelete(t *testing.T) {
 	defer cancel()
 	store := consumers.StartInMemoryStore(ctx)
 
-	store.Create(consumers.Consumer{"foo", "A. Foo"})
+	store.Create(consumers.Consumer{"foo", []byte("none"), "A. Foo"})
 	_, err := store.Read("foo")
 	if err != nil {
 		t.Fatalf("reading %q failed: %v", "foo", err)
