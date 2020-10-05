@@ -11,7 +11,7 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/themue/training-samples/pkg/services"
+	"github.com/themue/samples/pkg/services"
 )
 
 // TestSpawnServices validates the correct execution

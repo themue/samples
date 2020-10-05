@@ -44,7 +44,7 @@ func (svcs Services) Spawn() {
 // case the individual services are executed concurrently.
 type Provider struct {
 	ctx      context.Context
-	actionc  chan func()
+	actionC  chan func()
 	bookings map[string]Services
 }
 
@@ -52,7 +52,7 @@ type Provider struct {
 func StartProvider(ctx context.Context) *Provider {
 	p := &Provider{
 		ctx:      ctx,
-		actionc:  make(chan func(), 16),
+		actionC:  make(chan func(), 16),
 		bookings: make(map[string]Services),
 	}
 	go p.backend()
@@ -114,30 +114,30 @@ func (p *Provider) Spawn(consumerID string) {
 // until its done. Right now no handling of timeouts to cover
 // closed channels.
 func (p *Provider) doSync(action func()) {
-	donec := make(chan struct{})
+	doneC := make(chan struct{})
 
-	p.actionc <- func() {
+	p.actionC <- func() {
 		action()
-		close(donec)
+		close(doneC)
 	}
 
 	// Wait.
-	<-donec
+	<-doneC
 }
 
 // doAsync sends an action for execution to the backend.
 func (p *Provider) doAsync(action func()) {
-	p.actionc <- action
+	p.actionC <- action
 }
 
 // backend is the goroutine of the Provider.
 func (p *Provider) backend() {
-	defer close(p.actionc)
+	defer close(p.actionC)
 	for {
 		select {
 		case <-p.ctx.Done():
 			return
-		case action := <-p.actionc:
+		case action := <-p.actionC:
 			action()
 		}
 	}
