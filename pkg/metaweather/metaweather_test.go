@@ -84,9 +84,8 @@ func TestReadLondon(t *testing.T) {
 	}
 	minTemp := london.ConsolidatedWeather[0].MinTemp
 	maxTemp := london.ConsolidatedWeather[0].MaxTemp
-	theTemp := london.ConsolidatedWeather[0].TheTemp
-	t.Logf("London Temperature: Min = %.2f / Max = %.2f / Act = %.2f", minTemp, maxTemp, theTemp)
-	if theTemp < minTemp || theTemp > maxTemp {
+	t.Logf("London Temperature: Min = %.2f / Max = %.2f", minTemp, maxTemp)
+	if minTemp <= maxTemp {
 		t.Fatalf("temparature values are invalid ???")
 	}
 }

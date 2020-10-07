@@ -1,0 +1,54 @@
+// The Samples Project
+//
+// Copyright 2020 Frank Mueller / Oldenburg / Germany / World
+//
+// All rights reserved. Use of this source code is governed
+// by the new BSD license.
+
+syntax = "proto3";
+
+option go_package = ".;weather";
+
+// QueryRequest retrieves a number of locations based on the
+// query string.
+message QueryRequest {
+	string query = 1;
+}
+
+// QueryResponse contains none to multiple locations or an error.
+message QueryResponse {
+	message Location {
+		string title = 1;
+		string locationType = 2;
+		uint64 woeid = 3;
+	}
+	repeated Location locations = 1;
+	string error = 2;
+}
+
+// WeatherRequest retrieves one actual weather information based
+// on a Where on Earth ID.
+message WeatherRequest {
+	uint64 woeid = 1;
+}
+
+// WeatherResponse contains a weather information based on a requested WOEID
+// or an error.
+message WeatherResponse {
+	message Weather {
+		string title = 1;
+		string locationType = 2;
+		uint64 woeid = 3;
+		string time = 4;
+		string weatherState = 5;
+		double minTemp = 6;
+		double maxTemp = 7;
+		double windSpeed = 8;
+		double windDirection = 9;
+		double airPressure = 10;
+		double humidity = 11;
+	}
+	Weather weather = 1;
+	string error = 2;
+}
+
