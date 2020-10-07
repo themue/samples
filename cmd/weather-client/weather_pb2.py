@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=b'Z\t.;weather',
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\rweather.proto\"\x1d\n\x0cQueryRequest\x12\r\n\x05query\x18\x01 \x01(\t\"\x8a\x01\n\rQueryResponse\x12*\n\tlocations\x18\x01 \x03(\x0b\x32\x17.QueryResponse.Location\x12\r\n\x05\x65rror\x18\x02 \x01(\t\x1a>\n\x08Location\x12\r\n\x05title\x18\x01 \x01(\t\x12\x14\n\x0clocationType\x18\x02 \x01(\t\x12\r\n\x05woeid\x18\x03 \x01(\x04\"\x1f\n\x0eWeatherRequest\x12\r\n\x05woeid\x18\x01 \x01(\x04\"\xa2\x02\n\x0fWeatherResponse\x12)\n\x07weather\x18\x01 \x01(\x0b\x32\x18.WeatherResponse.Weather\x12\r\n\x05\x65rror\x18\x02 \x01(\t\x1a\xd4\x01\n\x07Weather\x12\r\n\x05title\x18\x01 \x01(\t\x12\x14\n\x0clocationType\x18\x02 \x01(\t\x12\r\n\x05woeid\x18\x03 \x01(\x04\x12\x0c\n\x04time\x18\x04 \x01(\t\x12\x14\n\x0cweatherState\x18\x05 \x01(\t\x12\x0f\n\x07minTemp\x18\x06 \x01(\x01\x12\x0f\n\x07maxTemp\x18\x07 \x01(\x01\x12\x11\n\twindSpeed\x18\x08 \x01(\x01\x12\x15\n\rwindDirection\x18\t \x01(\x01\x12\x13\n\x0b\x61irPressure\x18\n \x01(\x01\x12\x10\n\x08humidity\x18\x0b \x01(\x01\x42\x0bZ\t.;weatherb\x06proto3'
+  serialized_pb=b'\n\rweather.proto\"\x1d\n\x0cQueryRequest\x12\r\n\x05query\x18\x01 \x01(\t\"\x8a\x01\n\rQueryResponse\x12*\n\tlocations\x18\x01 \x03(\x0b\x32\x17.QueryResponse.Location\x12\r\n\x05\x65rror\x18\x02 \x01(\t\x1a>\n\x08Location\x12\r\n\x05title\x18\x01 \x01(\t\x12\x14\n\x0clocationType\x18\x02 \x01(\t\x12\r\n\x05woeid\x18\x03 \x01(\x04\"\x1f\n\x0eWeatherRequest\x12\r\n\x05woeid\x18\x01 \x01(\x04\"\xa2\x02\n\x0fWeatherResponse\x12)\n\x07weather\x18\x01 \x01(\x0b\x32\x18.WeatherResponse.Weather\x12\r\n\x05\x65rror\x18\x02 \x01(\t\x1a\xd4\x01\n\x07Weather\x12\r\n\x05title\x18\x01 \x01(\t\x12\x14\n\x0clocationType\x18\x02 \x01(\t\x12\r\n\x05woeid\x18\x03 \x01(\x04\x12\x0c\n\x04time\x18\x04 \x01(\t\x12\x14\n\x0cweatherState\x18\x05 \x01(\t\x12\x0f\n\x07minTemp\x18\x06 \x01(\x01\x12\x0f\n\x07maxTemp\x18\x07 \x01(\x01\x12\x11\n\twindSpeed\x18\x08 \x01(\x01\x12\x15\n\rwindDirection\x18\t \x01(\x01\x12\x13\n\x0b\x61irPressure\x18\n \x01(\x01\x12\x10\n\x08humidity\x18\x0b \x01(\x01\x32\x9b\x01\n\x0eWeatherService\x12(\n\x05Query\x12\r.QueryRequest\x1a\x0e.QueryResponse\"\x00\x12+\n\x04Read\x12\x0f.WeatherRequest\x1a\x10.WeatherResponse\"\x00\x12\x32\n\tSubscribe\x12\x0f.WeatherRequest\x1a\x10.WeatherResponse\"\x00\x30\x01\x42\x0bZ\t.;weatherb\x06proto3'
 )
 
 
@@ -368,4 +368,50 @@ _sym_db.RegisterMessage(WeatherResponse.Weather)
 
 
 DESCRIPTOR._options = None
+
+_WEATHERSERVICE = _descriptor.ServiceDescriptor(
+  name='WeatherService',
+  full_name='WeatherService',
+  file=DESCRIPTOR,
+  index=0,
+  serialized_options=None,
+  create_key=_descriptor._internal_create_key,
+  serialized_start=516,
+  serialized_end=671,
+  methods=[
+  _descriptor.MethodDescriptor(
+    name='Query',
+    full_name='WeatherService.Query',
+    index=0,
+    containing_service=None,
+    input_type=_QUERYREQUEST,
+    output_type=_QUERYRESPONSE,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='Read',
+    full_name='WeatherService.Read',
+    index=1,
+    containing_service=None,
+    input_type=_WEATHERREQUEST,
+    output_type=_WEATHERRESPONSE,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='Subscribe',
+    full_name='WeatherService.Subscribe',
+    index=2,
+    containing_service=None,
+    input_type=_WEATHERREQUEST,
+    output_type=_WEATHERRESPONSE,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+])
+_sym_db.RegisterServiceDescriptor(_WEATHERSERVICE)
+
+DESCRIPTOR.services_by_name['WeatherService'] = _WEATHERSERVICE
+
 # @@protoc_insertion_point(module_scope)

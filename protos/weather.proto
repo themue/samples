@@ -52,3 +52,16 @@ message WeatherResponse {
 	string error = 2;
 }
 
+// WeatherService defines the weather service itself with the remote procedure
+// calls using the messages defined above.
+service WeatherService {
+    // Query the served locations and their WOEIDs.
+    rpc Query(QueryRequest) returns (QueryResponse) {}
+
+    // Read one weather information based on a WOEID.
+    rpc Read(WeatherRequest) returns (WeatherResponse) {}
+
+    // Subscribe to the changes of a weather based on a WOEID.
+    rpc Subscribe(WeatherRequest) returns (stream WeatherResponse) {}
+}
+
